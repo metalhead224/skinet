@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Core.Entities;
 using Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +10,6 @@ namespace Infrastructure.Data
         public ProductRepository(StoreContext context)
         {
             _context = context;
-            
         }
 
         public async Task<IReadOnlyList<ProductBrand>> GetProductBrandsAsync()
