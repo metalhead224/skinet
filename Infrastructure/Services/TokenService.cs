@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Core.Entities.Identity;
 using Core.Interfaces;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Infrastructure.Services
