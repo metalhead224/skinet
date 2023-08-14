@@ -6,6 +6,7 @@
           (click)="onClick(i)"
           [class.active]="selectedIndex === i"
           class="nav-link py-3 text-uppercase fw-bold"
+          [disabled]="true"
         >
           {{ step.label }}
         </button>
