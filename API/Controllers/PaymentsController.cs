@@ -10,14 +10,15 @@ namespace API.Controllers
 {
     public class PaymentsController : BaseApiController
     {
-        public const string WhSecret = "whsec_e9dc2abbc419893ffd20e9e8faee0fc441aff3e0bd4dc287c0d4b399ab011a38";
+        public readonly string _whSecret;
         private readonly IPaymentService _paymentService;
         private readonly ILogger<PaymentsController> _logger;
-        public PaymentsController(IPaymentService paymentService, ILogger<PaymentsController> logger)
+        public PaymentsController(IPaymentService paymentService, ILogger<PaymentsController> logger, 
+            IConfiguration config)
         {
             _logger = logger;
             _paymentService = paymentService;
-            
+            _whSecret = config.GetSection("StripeSettings:WhSecret").Value;
         }
 
         [Authorize]
@@ -36,7 +37,7 @@ namespace API.Controllers
         {
             var json = await new StreamReader(Request.Body).ReadToEndAsync();
 
-            var stripeEvent = EventUtility.ConstructEvent(json, Request.Headers["Stripe-Signature"], WhSecret);
+            var stripeEvent = EventUtility.ConstructEvent(json, Request.Headers["Stripe-Signature"], _whSecret);
 
             PaymentIntent intent;
             Order order;
